@@ -1,14 +1,22 @@
 import axios from 'axios';
 import {AlbumDto} from "../types/dto/albumDto";
+import {Album} from "../types/album";
 
 const instance = axios.create({
-  baseURL: `${process.env.PUBLIC_URL}/albums`,
+  baseURL: `${process.env.REACT_APP_API_URL}/albums`,
   timeout: 1000,
 });
 
-export default {
-  getAlbums: async (page: number = 0, limit: number = 10, query: string = '') =>
-    await instance.get<AlbumDto[]>(`?_page=${page}&_limit=${limit}&q=${query}`),
+const mapAlbumDtoToAlbum = (albumDto: AlbumDto) => ({...albumDto, releaseDate: new Date(albumDto.releaseDate)});
 
-  getArtistAlbums: async (artistID: string) => await instance.get<AlbumDto[]>(`?artistId=${artistID}`),
+export default {
+  getAlbums: async (page: number = 0, limit: number = 10, query: string = ''): Promise<Album[]> => {
+    const response = await instance.get<AlbumDto[]>('', {params: {'_page': {page}, '_limit': limit, q: query}});
+    return response.data.map(mapAlbumDtoToAlbum);
+  },
+
+  getArtistAlbums: async (artistID: string): Promise<Album[]> => {
+    const response = await instance.get<AlbumDto[]>(`?artistId=${artistID}`);
+    return response.data.map(mapAlbumDtoToAlbum);
+  },
 }

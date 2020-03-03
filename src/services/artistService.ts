@@ -1,13 +1,14 @@
 import axios from 'axios';
 import {ArtistDto} from "../types/dto/artistDto";
+import {Artist} from "../types/artist";
 
 const instance = axios.create({
-  baseURL: `${process.env.PUBLIC_URL}/artists`,
+  baseURL: `${process.env.REACT_APP_API_URL}/artists`,
   timeout: 1000,
 });
 
 export default {
- getArtists: async () => await instance.get<ArtistDto[]>(''),
+ getArtists: async (): Promise<Artist[]> => await instance.get<ArtistDto[]>('').then(({data}) => data),
 
- getArtist: async (id: number) => await instance.get<ArtistDto>(`${id}`),
+ getArtist: async (id: number): Promise<Artist> => await instance.get<ArtistDto>(`${id}`).then(({data}) => data),
 }
