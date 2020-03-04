@@ -10,16 +10,16 @@ const Home: React.FC = () => {
   const [albums, setAlbums] = useState<AlbumType[]>( []);
   const [artists, setArtists] = useState<Artist[]>([]);
 
-  const {limit} = useQuery();
+  const {limit, search} = useQuery();
   useEffect(() => {
     (async () => {
-      const albumsResponse = await albumService.getAlbums(limit);
+      const albumsResponse = await albumService.getAlbums(limit, search);
       const artistsResponse = await artistService.getArtists();
 
       setAlbums(albumsResponse);
       setArtists(artistsResponse);
     })();
-  }, [limit]);
+  }, [limit, search]);
 
   const getArtist = (artistID: number): Artist => artists.find(({id}) => artistID === id) || {id: -1, title: 'Unknown'};
 
