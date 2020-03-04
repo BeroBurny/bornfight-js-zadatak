@@ -10,7 +10,7 @@ const instance = axios.create({
 const mapAlbumDtoToAlbum = (albumDto: AlbumDto) => ({...albumDto, releaseDate: new Date(albumDto.releaseDate)});
 
 export default {
-  getAlbums: async (page: number = 0, limit: number = 10, query: string = ''): Promise<Album[]> => {
+  getAlbums: async (limit: string = '10', query: string = '', page: string = '0'): Promise<Album[]> => {
     const response = await instance.get<AlbumDto[]>('', {params: {'_page': {page}, '_limit': limit, q: query}});
     return response.data.map(mapAlbumDtoToAlbum);
   },

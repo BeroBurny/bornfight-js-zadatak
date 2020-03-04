@@ -19,7 +19,7 @@ const Artist: React.FC = () => {
       setAlbums(albumsResponse);
       setArtists(artistsResponse);
     })();
-  }, []);
+  }, [id]);
 
   const getArtist = (artistID: number): ArtistType => artists.find(({id}) => artistID === id) || {id: -1, title: 'Unknown'};
 
