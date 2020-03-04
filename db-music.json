@@ -68,7 +68,7 @@
       "imageUrl": "https://is5-ssl.mzstatic.com/image/thumb/Music123/v4/56/33/14/56331415-1036-71f5-a4ec-ec4e1065f69b/19UMGIM88564.rgb.jpg/170x170bb.png",
       "releaseDate": "2019-11-15T00:00:00-07:00",
       "artistId": 3,
-      "favorite": false
+      "favorite": true
     },
     {
       "id": 4,
