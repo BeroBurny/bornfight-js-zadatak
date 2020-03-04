@@ -12,6 +12,8 @@ const Card = styled.div`
   align-items: center;
   justify-items: center;
   box-shadow: 0 1px 3px 0 #e7e7e7;
+  background-color: white;
+  margin-top: 10px;
 
   button {
     justify-self: end;
