@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import ContentStyle from "../components/Content";
-import {useRouteMatch, useHistory} from "react-router-dom";
+import {useRouteMatch, useHistory, Route} from "react-router-dom";
 import useQuery from "../hooks/useQuery";
 import createQueryString from "../utils/createQueryString";
 import {useArtistContext} from "../contexts/Artist";
@@ -32,12 +32,10 @@ const Header: React.FC = () => {
   const history = useHistory();
   const [searchInput, setSearch] = useState(search || '');
   useEffect(() => {
-    setSearch(search);
+    setSearch(search || '');
   }, [search]);
   const onSearchBlur = () => {
-    history.push({
-      search: createQueryString({search: searchInput, ...restQueryParams}),
-    });
+    history.push({search: createQueryString({search: searchInput, ...restQueryParams})});
   };
 
   const {getArtist} = useArtistContext();
@@ -49,19 +47,21 @@ const Header: React.FC = () => {
     <HeaderStyle>
       <Content>
         <Title>{match ? artist.title : 'Album list'}</Title>
-        {!match && <Search
-          type="search"
-          placeholder="Search"
-          value={searchInput}
-          onChange={(e) => setSearch(e.target.value)}
-          onBlur={onSearchBlur}
-          onKeyDown={(e) => {
-            if(e.keyCode === 13) {
-              // type for onKeyDown miss a blur function on event => target
-              (e.target as any).blur();
-            }
-          }}
-        />}
+        <Route path="/" exact>
+          <Search
+            type="search"
+            placeholder="Search"
+            value={searchInput}
+            onChange={(e) => setSearch(e.target.value)}
+            onBlur={onSearchBlur}
+            onKeyDown={(e) => {
+              if(e.keyCode === 13) {
+                // type for onKeyDown miss a blur function on event => target
+                (e.target as any).blur();
+              }
+            }}
+          />
+        </Route>
       </Content>
     </HeaderStyle>
   );
