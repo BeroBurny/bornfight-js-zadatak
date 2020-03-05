@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import ContentStyle from "../components/Content";
-import {Artist} from "../types/artist";
-import artistService from "../services/artistService";
 import {useRouteMatch, useHistory} from "react-router-dom";
 import useQuery from "../hooks/useQuery";
 import createQueryString from "../utils/createQueryString";
+import {useArtistContext} from "../contexts/Artist";
 
 const Content = styled(ContentStyle)`
   display: flex;
@@ -52,17 +51,10 @@ const Header: React.FC = () => {
     });
   };
 
-  const [artists, setArtists] = useState<Artist[]>([]);
-  useEffect(() => {
-    (async () => {
-      const artistsResponse = await artistService.getArtists();
-      setArtists(artistsResponse);
-    })();
-  }, []);
-
+  const {getArtist} = useArtistContext();
   const match = useRouteMatch<{id?: string}>('/artist/:id');
   const params = match ? match.params : {id: -1};
-  const artist = artists.find(({id}) => id === Number(params.id)) || {id: -1, title: 'Unknown'};
+  const artist = getArtist(Number(params.id));
 
   return (
     <HeaderStyle>
