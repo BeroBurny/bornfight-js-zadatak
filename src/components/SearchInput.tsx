@@ -4,7 +4,6 @@ import search from '../assets/svg/search.svg';
 
 const Search = styled.input`
   border-radius: 4px;
-  margin-top: 35px;
   height: 40px;
   width: 100%;
   max-width: 420px;
@@ -19,6 +18,10 @@ const Search = styled.input`
   background-position: calc(100% - 15px) 50%;
   background-repeat: no-repeat;
   padding: 5px 40px 5px 20px;
+ 
+  @media screen and (max-width: 600px) {
+    max-width: 100%;
+  }
 `;
 
 export default Search;

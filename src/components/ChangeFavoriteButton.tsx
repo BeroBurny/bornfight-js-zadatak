@@ -3,6 +3,7 @@ import styled from "styled-components";
 import color from "../enums/color";
 
 const Button = styled.button<{favorite: boolean}>`
+  grid-area: favorite;
   width: 125px;
   font-size: 10px;
   font-weight: ${({favorite}) => favorite ? 'normal' : 'bold'};
@@ -12,6 +13,10 @@ const Button = styled.button<{favorite: boolean}>`
   background-color: ${({favorite}) => favorite ? color.BACKGROUND : color.PRIMARY};;
   padding: 7px 0;
   border: none;
+  
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
 `;
 
 interface Props {

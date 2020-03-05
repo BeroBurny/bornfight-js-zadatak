@@ -6,11 +6,26 @@ import useQuery from "../hooks/useQuery";
 import createQueryString from "../utils/createQueryString";
 import {useArtistContext} from "../contexts/Artist";
 import color from "../enums/color";
-import Search from "../components/SearchInput";
+import SearchStyle from "../components/SearchInput";
 
 const Content = styled(ContentStyle)`
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  
+  @media screen and (max-width: 600px) {
+    max-width: 100%;
+    flex-direction: column;
+  }
+`;
+
+const Search = styled(SearchStyle)`
+  margin-top: 35px;
+  
+  @media screen and (max-width: 600px) {
+    margin-top: -20px;
+    margin-bottom: 10px;
+  }
 `;
 
 const HeaderStyle = styled.header`
