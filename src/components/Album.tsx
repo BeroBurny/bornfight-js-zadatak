@@ -96,9 +96,10 @@ interface Props {
   price: string;
   favorite: boolean;
   artist: Artist;
+  onFavoriteClick: () => void;
 }
 
-const Album: React.FC<Props> = ({imageUrl, title, releaseDate, price, favorite, artist}) => (
+const Album: React.FC<Props> = ({imageUrl, title, releaseDate, price, favorite, artist, onFavoriteClick}) => (
   <Card>
     <AlbumTitle>
       <Cover src={imageUrl} alt={`Cover for ${title} by ${artist.title}`}/>
@@ -109,8 +110,7 @@ const Album: React.FC<Props> = ({imageUrl, title, releaseDate, price, favorite, 
     </AlbumTitle>
     <Release>Released: <Year>{releaseDate.getFullYear()}</Year></Release>
     <Price>{price}</Price>
-
-    <ChangeFavoriteButton favorite={favorite} />
+    <ChangeFavoriteButton favorite={favorite} onClick={onFavoriteClick} />
   </Card>
 );
 

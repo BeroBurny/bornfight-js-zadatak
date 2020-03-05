@@ -11,7 +11,7 @@ const Artist: React.FC = () => {
   const [artists, setArtists] = useState<ArtistType[]>([]);
   const {id} = useParams();
 
-  useEffect(() => {
+  const fetchData = () => {
     (async () => {
       const albumsResponse = await albumService.getArtistAlbums(id || '');
       const artistsResponse = await artistService.getArtists();
@@ -19,14 +19,19 @@ const Artist: React.FC = () => {
       setAlbums(albumsResponse);
       setArtists(artistsResponse);
     })();
-  }, [id]);
+  };
+  useEffect(fetchData, [id]);
 
   const getArtist = (artistID: number): ArtistType => artists.find(({id}) => artistID === id) || {id: -1, title: 'Unknown'};
 
+  const onFavoriteClick = (id: number, favorite: boolean) => () => {
+    albumService.setFavorite(id, !favorite).then(() => fetchData());
+  };
+
   return (
     <div>
-      {albums.map(({artistId, ...album}) => (
-        <Album key={album.id} artist={getArtist(artistId)} {...album} />
+      {albums.map(({artistId, id, ...album}) => (
+        <Album key={id} artist={getArtist(artistId)} onFavoriteClick={onFavoriteClick(id, album.favorite)} {...album} />
       ))}
     </div>
   );

@@ -19,4 +19,6 @@ export default {
     const response = await instance.get<AlbumDto[]>(`?artistId=${artistID}`);
     return response.data.map(mapAlbumDtoToAlbum);
   },
+
+  setFavorite: async (albumID: number, favorite: boolean) => await instance.patch(`${albumID}`, {favorite}),
 }
