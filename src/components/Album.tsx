@@ -3,6 +3,7 @@ import {Artist} from "../types/artist";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import ChangeFavoriteButton from "./ChangeFavoriteButton";
+import color from "../enums/color";
 
 const Card = styled.div`
   padding: 18px;
@@ -11,8 +12,8 @@ const Card = styled.div`
   grid-template-columns: 3fr 1fr 1fr 1fr;
   align-items: center;
   justify-items: center;
-  box-shadow: 0 1px 3px 0 #e7e7e7;
-  background-color: white;
+  box-shadow: 0 1px 3px 0 ${color.SHADOW_LIGHT};
+  background-color: ${color.BACKGROUND};
   margin-top: 10px;
 
   button {
@@ -24,32 +25,25 @@ const AlbumTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-self: start;
+`;
 
-  h3 {
-    font-family: WorkSans, serif;
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.33;
-    letter-spacing: -0.66px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
+const Title = styled.h3`
+  color: ${color.PRIMARY_TEXT};
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.33;
+  letter-spacing: -0.66px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 `;
 
 const ArtistName = styled(Link)`
-  font-family: WorkSans, serif;
   text-decoration: none;
   font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: -0.44px;
   margin-top: 6px;
   margin-bottom: 6px;
-  color: #a0a0a0;
+  color: ${color.LIGHT_TEXT};
 `;
 
 const Cover = styled.img`
@@ -59,34 +53,20 @@ const Cover = styled.img`
 `;
 
 const Release = styled.p`
-  font-family: WorkSans, serif;
   font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: -0.51px;
-  color: #a0a0a0;
+  color: ${color.LIGHT_TEXT};
 `;
 
 const Year = styled.span`
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: -0.51px;
-  color: #000000;
+  color: ${color.SECONDARY_TEXT};
 `;
 
 const Price = styled.p`
-  font-family: WorkSans, serif;
   font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
   letter-spacing: -0.51px;
-  color: #000000;
+  color: ${color.SECONDARY_TEXT};
 `;
 
 interface Props {
@@ -104,7 +84,7 @@ const Album: React.FC<Props> = ({imageUrl, title, releaseDate, price, favorite, 
     <AlbumTitle>
       <Cover src={imageUrl} alt={`Cover for ${title} by ${artist.title}`}/>
       <div>
-        <h3>{title}</h3>
+        <Title>{title}</Title>
         <ArtistName to={`/artist/${artist.id}`}>{artist.title}</ArtistName>
       </div>
     </AlbumTitle>

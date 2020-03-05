@@ -5,6 +5,8 @@ import {useRouteMatch, useHistory} from "react-router-dom";
 import useQuery from "../hooks/useQuery";
 import createQueryString from "../utils/createQueryString";
 import {useArtistContext} from "../contexts/Artist";
+import color from "../enums/color";
+import Search from "../components/SearchInput";
 
 const Content = styled(ContentStyle)`
   display: flex;
@@ -14,28 +16,15 @@ const Content = styled(ContentStyle)`
 const HeaderStyle = styled.header`
   background-color: white;
   margin-bottom: 40px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 4px 0 ${color.SHADOW_LIGHT};
 `;
 
 const Title = styled.h1`
-  font-family: WorkSans;
   font-size: 24px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
+  color: ${color.PRIMARY_TEXT};
   letter-spacing: -0.88px;
   margin: 0;
   padding: 35px 0;
-`;
-
-const Search = styled.input`
-  border-radius: 4px;
-  margin-top: 35px;
-  height: 40px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
 `;
 
 const Header: React.FC = () => {
@@ -62,6 +51,7 @@ const Header: React.FC = () => {
         <Title>{match ? artist.title : 'Album list'}</Title>
         {!match && <Search
           type="search"
+          placeholder="Search"
           value={searchInput}
           onChange={(e) => setSearch(e.target.value)}
           onBlur={onSearchBlur}
