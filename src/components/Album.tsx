@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import ChangeFavoriteButton from "./ChangeFavoriteButton";
 import color from "../enums/color";
+import { ReactComponent as StarIcon } from '../assets/svg/star.svg';
 
 const Card = styled.div`
   padding: 18px;
@@ -46,10 +47,22 @@ const ArtistName = styled(Link)`
   color: ${color.LIGHT_TEXT};
 `;
 
+const CoverWrap = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-right: 25px;
+`;
+
+const Icon = styled(StarIcon)`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+`;
+
 const Cover = styled.img`
+  display: block;
   height: 54px;
   width: 54px;
-  margin-right: 25px;
 `;
 
 const Release = styled.p`
@@ -82,7 +95,10 @@ interface Props {
 const Album: React.FC<Props> = ({imageUrl, title, releaseDate, price, favorite, artist, onFavoriteClick}) => (
   <Card>
     <AlbumTitle>
-      <Cover src={imageUrl} alt={`Cover for ${title} by ${artist.title}`}/>
+      <CoverWrap>
+        <Cover src={imageUrl} alt={`Cover for ${title} by ${artist.title}`}/>
+        {favorite && <Icon />}
+      </CoverWrap>
       <div>
         <Title>{title}</Title>
         <ArtistName to={`/artist/${artist.id}`}>{artist.title}</ArtistName>
