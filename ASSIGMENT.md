@@ -21,8 +21,8 @@ Tvoj zadatak je napraviti web aplikaciju koja prikazuje listu albuma i detalje i
 
 #### Dodatne napomene
 mock API sa instalacijskim postupkom se nalazi u prilogu  
-![main screen mock][https://github.com/BeroBurny/bornfight-js-zadatak/blob/master/asset1.jpg]  
-![artist screen mock][https://github.com/BeroBurny/bornfight-js-zadatak/blob/master/asset2.jpg]  
+<img src="asset1.jpg">  
+<img src="asset2.jpg"> 
 
 #### Dodatna pravila
 
